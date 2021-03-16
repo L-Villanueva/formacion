@@ -17,9 +17,7 @@ import kotlinx.coroutines.launch
  */
 class HomeViewModel(private val repository: TransactionRepository): BaseViewModel() {
 
-
     val transactionsList: LiveData<List<TransactionDTO>> = repository.mTransactions
-
 
     fun fetchTransactions(){
         _isLoading.value = true

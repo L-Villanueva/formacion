@@ -13,7 +13,7 @@ import org.jetbrains.anko.startActivity
  */
 class SplashActivity: BaseActivity() {
 
-    lateinit var binding: ActivitySplashBinding
+    private lateinit var binding: ActivitySplashBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,9 +33,5 @@ class SplashActivity: BaseActivity() {
                 }
             }
         }.start()
-
-        val hol =  "hola".removeFirstLastChar()
     }
-
-
 }

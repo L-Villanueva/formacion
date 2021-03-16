@@ -24,5 +24,4 @@ abstract class BaseFragment: Fragment() {
         errorDialog?.dismiss()
     }
 
-
 }

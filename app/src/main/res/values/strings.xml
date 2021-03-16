@@ -103,4 +103,6 @@
     <string name="accept">Aceptar</string>
     <string name="alert">AVISO</string>
     <string name="close">Cerrar</string>
+    <string name="go_to_profile">Go to profile</string>
+    <string name="go_to_list">Go to list</string>
 </resources>
