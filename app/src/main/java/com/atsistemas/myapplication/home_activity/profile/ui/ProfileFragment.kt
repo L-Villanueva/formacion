@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.atsistemas.myapplication.R
 import com.atsistemas.myapplication.commons.BaseFragment
+import com.atsistemas.myapplication.commons.uicomponents.ErrorDialog
 import com.atsistemas.myapplication.databinding.ProfileFragmentBinding
 import com.atsistemas.myapplication.home_activity.profile.vm.ProfileViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
@@ -35,6 +37,15 @@ class ProfileFragment:BaseFragment() {
         })
         presenter.showMessage.observe(viewLifecycleOwner, {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
+        presenter.showError.observe(viewLifecycleOwner, {
+            errorDialog = activity?.let { activity ->
+                ErrorDialog(activity, getString(R.string.alert), it, getString(R.string.close)) {
+                    errorDialog?.dismiss()
+                }
+            }
+            errorDialog!!.setCancelable(false)
+            errorDialog!!.show()
         })
     }
 

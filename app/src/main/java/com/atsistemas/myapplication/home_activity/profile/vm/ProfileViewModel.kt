@@ -13,6 +13,7 @@ import com.atsistemas.myapplication.commons.Constants.USER_SURNAME
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import java.lang.Exception
 
 class ProfileViewModel(private val application: Application): BaseViewModel() {
 
@@ -30,9 +31,13 @@ class ProfileViewModel(private val application: Application): BaseViewModel() {
         viewModelScope
         _isLoading.value = true
         viewModelScope.launch (Dispatchers.IO){
-           application.dataStore.edit { settings ->
-                settings[USER_NAME] = name
-                settings[USER_SURNAME] = surname
+           try {
+               application.dataStore.edit { settings ->
+                   settings[USER_NAME] = name
+                   settings[USER_SURNAME] = surname
+               }
+           } catch (ie: Exception) {
+               _showError.postValue(application.getString(R.string.error_saving))
            }
             _isLoading.postValue(false)
             showMessage(application.getString(R.string.save_successful))
