@@ -9,8 +9,10 @@ import com.atsistemas.data.R
 import com.atsistemas.data.commons.BaseRepository
 import com.atsistemas.data.commons.Constants.USER_NAME
 import com.atsistemas.data.commons.Constants.USER_SURNAME
+import com.atsistemas.data.remote.ResultHandler
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.map
+import java.lang.Exception
 
 
 class DataStoreRepository(private val context: Context): BaseRepository() {
@@ -25,12 +27,17 @@ class DataStoreRepository(private val context: Context): BaseRepository() {
         settings[USER_SURNAME]
     }
 
-    suspend fun saveUser(name: String, surname: String) {
+    suspend fun saveUser(name: String, surname: String): ResultHandler<String> {
+        return try {
+            context.dataStore.edit { settings ->
+                settings[USER_NAME] = name
+                settings[USER_SURNAME] = surname
 
-        context.dataStore.edit { settings ->
-            settings[USER_NAME] = name
-            settings[USER_SURNAME] = surname
+            }
+            ResultHandler.Success(context.getString(R.string.save_successful))
 
+        } catch (ie: Exception){
+            ResultHandler.GenericError(ie.message)
         }
     }
 }

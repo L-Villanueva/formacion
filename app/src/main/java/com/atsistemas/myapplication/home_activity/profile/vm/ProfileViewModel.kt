@@ -8,6 +8,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.*
+import com.atsistemas.data.remote.ResultHandler
 import com.atsistemas.data.repositories.DataStoreRepository
 import com.atsistemas.myapplication.R
 import com.atsistemas.myapplication.commons.BaseViewModel
@@ -15,7 +16,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class ProfileViewModel(private val application : Application, private val repository: DataStoreRepository): BaseViewModel() {
+class ProfileViewModel(private val repository: DataStoreRepository): BaseViewModel() {
 
     val username = repository.username.asLiveData()
     val usersurname = repository.usersurname.asLiveData()
@@ -23,14 +24,15 @@ class ProfileViewModel(private val application : Application, private val reposi
      fun saveUser(name: String, surname: String){
          _isLoading.value = true
          viewModelScope.launch (Dispatchers.IO){
-             try {
-                 repository.saveUser(name, surname)
-             } catch (ie: Exception) {
-                 _showError.postValue(application.getString(R.string.error_saving))
+             when (val result = repository.saveUser(name, surname)){
+                 is ResultHandler.Success -> {
+                     showMessage(result.data)
+                 }
+                 else -> {
+                     setShowError(result)
+                 }
              }
              _isLoading.postValue(false)
-             showMessage(application.getString(R.string.save_successful))
          }
-
      }
 }
