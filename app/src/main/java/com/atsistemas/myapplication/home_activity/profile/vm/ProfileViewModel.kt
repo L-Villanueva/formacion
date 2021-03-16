@@ -28,7 +28,6 @@ class ProfileViewModel(private val application: Application): BaseViewModel() {
     }.asLiveData()
 
     fun saveUser(name: String, surname: String) {
-        viewModelScope
         _isLoading.value = true
         viewModelScope.launch (Dispatchers.IO){
            try {
@@ -39,6 +38,7 @@ class ProfileViewModel(private val application: Application): BaseViewModel() {
            } catch (ie: Exception) {
                _showError.postValue(application.getString(R.string.error_saving))
            }
+
             _isLoading.postValue(false)
             showMessage(application.getString(R.string.save_successful))
         }
