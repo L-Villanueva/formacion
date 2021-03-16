@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.atsistemas.myapplication.commons.BaseFragment
 import com.atsistemas.myapplication.databinding.ProfileFragmentBinding
 import com.atsistemas.myapplication.home_activity.profile.vm.ProfileViewModel
@@ -32,10 +33,13 @@ class ProfileFragment:BaseFragment() {
         presenter.usersurname.observe(viewLifecycleOwner, {
             binding.tvSurname.setText(it)
         })
+        presenter.showMessage.observe(viewLifecycleOwner, {
+            Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
+        })
     }
 
     private fun configureButton(){
-        
+
         binding.buttonApply.setOnClickListener {
             val username = binding.tvName.text.toString()
             val usersurname = binding.tvSurname.text.toString()

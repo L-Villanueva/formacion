@@ -2,18 +2,15 @@ package com.atsistemas.myapplication.home_activity.profile.vm
 
 import android.app.Application
 import androidx.datastore.core.DataStore
-import androidx.datastore.dataStore
-import androidx.datastore.dataStoreFile
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.preferencesDataStore
-import androidx.datastore.preferences.preferencesDataStoreFile
 import androidx.lifecycle.*
+import com.atsistemas.myapplication.R
 import com.atsistemas.myapplication.commons.BaseViewModel
 import com.atsistemas.myapplication.commons.Constants.USER_NAME
 import com.atsistemas.myapplication.commons.Constants.USER_SURNAME
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
@@ -38,6 +35,7 @@ class ProfileViewModel(private val application: Application): BaseViewModel() {
                 settings[USER_SURNAME] = surname
            }
             _isLoading.postValue(false)
+            showMessage(application.getString(R.string.save_successful))
         }
     }
 }

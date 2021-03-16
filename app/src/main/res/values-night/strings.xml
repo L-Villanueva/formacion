@@ -2,4 +2,5 @@
 <resources>
     <string name="go_to_profile">Go to profile</string>
     <string name="go_to_list">Go to list</string>
+    <string name="save_successful">Save successful</string>
 </resources>
