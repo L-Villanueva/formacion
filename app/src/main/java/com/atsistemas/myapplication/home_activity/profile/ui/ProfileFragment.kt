@@ -47,6 +47,13 @@ class ProfileFragment:BaseFragment() {
             errorDialog!!.setCancelable(false)
             errorDialog!!.show()
         })
+        presenter.isLoading.observe(viewLifecycleOwner,{
+            if (it){
+                binding.progressBar.visibility = View.VISIBLE
+            }else{
+                binding.progressBar.visibility = View.GONE
+            }
+        })
     }
 
     private fun configureButton(){
