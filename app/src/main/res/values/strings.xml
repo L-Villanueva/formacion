@@ -107,4 +107,6 @@
     <string name="go_to_list">Go to list</string>
     <string name="save_successful">Save successful</string>
     <string name="error_saving">error guardando datos</string>
+    <string name="edit_text">Edit Text</string>
+    <string name="saved_data">Saved Data</string>
 </resources>

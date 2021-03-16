@@ -30,10 +30,10 @@ class ProfileFragment:BaseFragment() {
 
     override fun loadObservers() {
         presenter.username.observe(viewLifecycleOwner, {
-            binding.tvName.setText(it)
+            binding.tvNameSaved.text = it
         })
         presenter.usersurname.observe(viewLifecycleOwner, {
-            binding.tvSurname.setText(it)
+            binding.tvSurnameSaved.text = it
         })
         presenter.showMessage.observe(viewLifecycleOwner, {
             Toast.makeText(context, it, Toast.LENGTH_SHORT).show()
