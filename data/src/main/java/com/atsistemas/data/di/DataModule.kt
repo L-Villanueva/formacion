@@ -1,6 +1,8 @@
 package com.atsistemas.data.di
 
 import com.atsistemas.data.di.providers.*
+import com.atsistemas.data.repositories.DataStoreRepository
+import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
 /**
@@ -15,4 +17,6 @@ val dataModule = module {
     single { provideTransactionApi( get() )}
     single { provideBankDatabase( get() ) }
     single { provideTransactionRepository( get(), get() )}
+    factory { DataStoreRepository(get()) }
+
 }

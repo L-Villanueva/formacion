@@ -11,7 +11,5 @@ object Constants {
     //Errors
     const val NETWORK_ERROR = "Network Error"
 
-    val USER_NAME = stringPreferencesKey("user_name")
 
-    val USER_SURNAME = stringPreferencesKey("user_surname")
 }

@@ -15,5 +15,5 @@ val uiModule = module {
     viewModel { HomeViewModelActivity() }
     viewModel { HomeViewModel(get()) }
     viewModel { SharedTransactionVM() }
-    viewModel { ProfileViewModel(get()) }
+    viewModel { ProfileViewModel(get(), get())}
 }
