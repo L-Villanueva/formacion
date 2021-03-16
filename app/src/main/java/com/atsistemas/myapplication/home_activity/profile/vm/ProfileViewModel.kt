@@ -15,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class ProfileViewModel(private val repository: DataStoreRepository, val context : Context): BaseViewModel() {
+class ProfileViewModel(private val application : Application, private val repository: DataStoreRepository): BaseViewModel() {
 
     val username = repository.username.asLiveData()
     val usersurname = repository.usersurname.asLiveData()
@@ -26,10 +26,10 @@ class ProfileViewModel(private val repository: DataStoreRepository, val context 
              try {
                  repository.saveUser(name, surname)
              } catch (ie: Exception) {
-                 _showError.postValue(context.getString(R.string.error_saving))
+                 _showError.postValue(application.getString(R.string.error_saving))
              }
              _isLoading.postValue(false)
-             showMessage(context.getString(R.string.save_successful))
+             showMessage(application.getString(R.string.save_successful))
          }
 
      }
