@@ -1,10 +1,12 @@
 package com.atsistemas.data.di.providers
 
 import android.app.Application
+import android.content.Context
 import com.atsistemas.data.BuildConfig
 import com.atsistemas.data.local.BankDatabase
 import com.atsistemas.data.remote.ITransactionAPI
 import com.atsistemas.data.remote.interceptors.MockInterceptor
+import com.atsistemas.data.repositories.DataStoreRepository
 import com.atsistemas.data.repositories.TransactionRepository
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -56,5 +58,7 @@ fun provideTransactionApi (retrofit: Retrofit): ITransactionAPI = retrofit
 fun provideBankDatabase(application: Application): BankDatabase {
     return BankDatabase.getInstance(application)
 }
+
+fun provideDataStore(context: Context): DataStoreRepository = DataStoreRepository(context)
 
 fun provideTransactionRepository(retrofit: ITransactionAPI, bankDB: BankDatabase): TransactionRepository = TransactionRepository(retrofit, bankDB)

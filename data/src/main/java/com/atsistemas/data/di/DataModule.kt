@@ -10,6 +10,7 @@ import org.koin.dsl.module
  */
 
 val dataModule = module {
+
     single { provideOkHttpClient(get()) }
     single { provideMockInterceptor(get()) }
     single { provideGson()}
@@ -17,6 +18,6 @@ val dataModule = module {
     single { provideTransactionApi( get() )}
     single { provideBankDatabase( get() ) }
     single { provideTransactionRepository( get(), get() )}
-    factory { DataStoreRepository(get()) }
+    single { provideDataStore(get()) }
 
 }
